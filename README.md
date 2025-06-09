@@ -121,11 +121,11 @@ Sigue estos pasos para configurar y ejecutar el proyecto en tu entorno local:
 
 ## Autor
 
-*   **[Tu Nombre Completo o Alias]**
-*   [Tu Email (Opcional)]
-*   [Enlace a tu Perfil de GitHub (Opcional)]
-*   [Enlace a tu LinkedIn (Opcional)]
+*   **Giovanni Cubelli**
+*   cubelligiovanni@gmail.com
+*   (https://github.com/giovannicubelli)
+*   (https://www.linkedin.com/in/giovanni-cubelli-b52691266?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
 
 ## Video Demostrativo
 
-[Enlace a tu video de demostración de 10 minutos - súbelo a YouTube, Vimeo, Drive, etc. y pega el enlace aquí]
+(https://drive.google.com/file/d/1Nwq27MQoTSpGUdLjBU4HtGU3Dn8qTRBR/view)
