@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Publicaciones - Comic Blog{% endblock %}
+
+{% block content %}
+<h1>Todas las Publicaciones (Cómics)</h1>
+
+{% if posts %}
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+                {% if post.imagen %}
+                    <img src="{{ post.imagen.url }}" class="card-img-top" alt="{{ post.titulo }}" style="height: 200px; object-fit: cover;">
+                {% else %}
+                    <img src="https://via.placeholder.com/300x200.png?text=Sin+Imagen" class="card-img-top" alt="Sin Imagen" style="height: 200px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ post.titulo }}</h5>
+                    <p class="card-text"><small class="text-muted">Por: {{ post.autor.username }} - {{ post.fecha_publicacion|date:"d M Y" }}</small></p>
+                    {% if post.subtitulo %}<p class="card-text text-muted">{{ post.subtitulo }}</p>{% endif %}
+                    <div class="mt-auto">
+                        <!-- ACTUALIZADO AQUÍ -->
+                        <a href="{% url 'blog:post_detail' post.pk %}" class="btn btn-primary">Leer Más</a>
+                        {% if user.is_authenticated and user == post.autor %}
+                            <!-- ACTUALIZADO AQUÍ -->
+                            <a href="{% url 'blog:post_update' post.pk %}" class="btn btn-secondary btn-sm">Editar</a>
+                            <!-- ACTUALIZADO AQUÍ -->
+                            <a href="{% url 'blog:post_delete' post.pk %}" class="btn btn-danger btn-sm">Borrar</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-info" role="alert">
+        No hay publicaciones aún. ¡Sé el primero en 
+        <!-- ACTUALIZADO AQUÍ -->
+        <a href="{% url 'blog:post_create' %}">crear una</a>!
+    </div>
+{% endif %}
+{% endblock %}

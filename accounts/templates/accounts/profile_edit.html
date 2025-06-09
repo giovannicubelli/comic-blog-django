@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Editar Perfil{% endblock %}
+
+{% block content %}
+<h2>Editar Perfil</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <fieldset class="mb-3">
+        <legend>Información de Usuario</legend>
+        {{ user_form.as_p }}
+    </fieldset>
+    <fieldset>
+        <legend>Información de Perfil</legend>
+        {{ profile_form.media }} {# Si el avatar usa algún widget especial #}
+        {{ profile_form.as_p }}
+    </fieldset>
+    <button type="submit" class="btn btn-success mt-3">Guardar Cambios</button>
+    <a href="{% url 'profile' %}" class="btn btn-secondary mt-3">Cancelar</a>
+</form>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.titulo }} - Comic Blog{% endblock %}
+
+{% block content %}
+<article>
+    <h1>{{ post.titulo }}</h1>
+    {% if post.subtitulo %}<h4 class="text-muted">{{ post.subtitulo }}</h4>{% endif %}
+    <p class="text-muted">
+        Publicado por: {{ post.autor.username }} el {{ post.fecha_publicacion|date:"d F, Y H:i" }}
+        {% if post.editorial %}| Editorial: {{ post.editorial }}{% endif %}
+    </p>
+
+    {% if post.imagen %}
+        <img src="{{ post.imagen.url }}" alt="{{ post.titulo }}" class="img-fluid mb-3" style="max-height: 400px;">
+    {% endif %}
+
+    <div class="post-content">
+        {{ post.contenido|safe }}
+    </div>
+
+    {% if user.is_authenticated and user == post.autor %}
+        <hr>
+        <!-- ACTUALIZADO AQUÍ -->
+        <a href="{% url 'blog:post_update' post.pk %}" class="btn btn-warning">Editar Publicación</a>
+        <!-- ACTUALIZADO AQUÍ -->
+        <a href="{% url 'blog:post_delete' post.pk %}" class="btn btn-danger">Eliminar Publicación</a>
+    {% endif %}
+</article>
+<hr>
+<!-- ACTUALIZADO AQUÍ -->
+<a href="{% url 'blog:post_list' %}" class="btn btn-secondary">« Volver a todas las publicaciones</a>
+{% endblock %}

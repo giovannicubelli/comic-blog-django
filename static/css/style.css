@@ -1,0 +1,5 @@
+body {
+    background-image: url('../imagenes/fondo_inicio.jpg'); 
+    background-position: center;
+    background-attachment: fixed; /* Para que no se mueva al hacer scroll */
+}

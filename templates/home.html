@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio - Comic Blog{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">¡Bienvenido al Comic Blog!</h1>
+    <p class="lead">Tu fuente de noticias, reseñas y discusiones sobre el universo del cómic.</p>
+    <hr class="my-4">
+    <p>Explora nuestras últimas publicaciones o únete a la conversación.</p>
+    <!-- ACTUALIZADO AQUÍ -->
+    <a class="btn btn-primary btn-lg" href="{% url 'blog:post_list' %}" role="button">Ver Publicaciones</a>
+</div>
+
+{% if latest_posts %}
+<div class="mt-5">
+    <h2>Últimas Publicaciones</h2>
+    <div class="row">
+        {% for post in latest_posts %}
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                {% if post.imagen %}
+                <img src="{{ post.imagen.url }}" class="card-img-top" alt="{{ post.titulo }}" style="height: 150px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.titulo }}</h5>
+                    <p class="card-text"><small class="text-muted">{{ post.fecha_publicacion|date:"d M Y" }} by {{ post.autor.username }}</small></p>
+                    <!-- ACTUALIZADO AQUÍ -->
+                    <a href="{% url 'blog:post_detail' post.pk %}" class="btn btn-sm btn-outline-primary">Leer más</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Mis Mensajes{% endblock %}
+
+{% block content %}
+<h2>Mis Mensajes</h2>
+<a href="{% url 'message_create' %}" class="btn btn-primary mb-3">Nuevo Mensaje</a>
+
+{% if messages_grouped %} {# Asumimos que pasamos 'messages_grouped' o similar desde la vista #}
+    <ul class="list-group">
+        {% for conversation in messages_grouped %}
+        <li class="list-group-item {% if not conversation.latest_message.is_read and conversation.latest_message.recipient == request.user %}list-group-item-info fw-bold{% endif %}">
+            <a href="{% url 'message_thread' conversation.other_user.username %}" class="text-decoration-none text-dark">
+                Conversación con: <strong>{{ conversation.other_user.username }}</strong><br>
+                <small class="text-muted">
+                    {% if conversation.latest_message.sender == request.user %}Tú:{% endif %}
+                    {{ conversation.latest_message.body|truncatewords:10 }} -
+                    <em>{{ conversation.latest_message.timestamp|timesince }} ago</em>
+                </small>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No tienes mensajes.</p>
+{% endif %}
+{% endblock %}

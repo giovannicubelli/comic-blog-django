@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Mi Perfil - {{ user.username }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4 text-center">
+        {% if profile.avatar %}
+            <img src="{{ profile.avatar.url }}" alt="Avatar de {{ user.username }}" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+        {% else %}
+            <img src="{% static 'path/to/default_avatar.png' %}" alt="Avatar por defecto" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+        {% endif %}
+        <h3>{{ user.username }}</h3>
+        {% if user.first_name and user.last_name %}
+            <p>{{ user.first_name }} {{ user.last_name }}</p>
+        {% endif %}
+    </div>
+    <div class="col-md-8">
+        <h2>Información del Perfil</h2>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        {% if profile.biografia %}
+            <p><strong>Biografía:</strong><br>{{ profile.biografia|linebreaksbr }}</p>
+        {% endif %}
+        {% if profile.link_web %}
+            <p><strong>Sitio Web:</strong> <a href="{{ profile.link_web }}" target="_blank">{{ profile.link_web }}</a></p>
+        {% endif %}
+        {# {% if profile.fecha_cumpleanios %}
+            <p><strong>Fecha de Nacimiento:</strong> {{ profile.fecha_cumpleanios|date:"d F, Y" }}</p>
+        {% endif %} #}
+
+        <a href="{% url 'profile_edit' %}" class="btn btn-primary mt-3">Editar Perfil</a>
+        <a href="{% url 'password_change' %}" class="btn btn-secondary mt-3">Cambiar Contraseña</a>
+    </div>
+</div>
+{% endblock %}

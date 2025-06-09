@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Conversación con {{ other_user.username }}{% endblock %}
+
+{% block content %}
+<h2>Conversación con {{ other_user.username }}</h2>
+
+<div class="mb-3 border p-3" style="max-height: 400px; overflow-y: auto;">
+    {% for message in thread_messages %}
+        <div class="mb-2 p-2 {% if message.sender == request.user %}bg-light text-end{% else %}bg-secondary bg-opacity-25{% endif %} rounded">
+            <strong>{% if message.sender == request.user %}Tú{% else %}{{ message.sender.username }}{% endif %}:</strong>
+            {% if message.subject %}<p class="mb-0"><em>Asunto: {{ message.subject }}</em></p>{% endif %}
+            <p class="mb-0">{{ message.body|linebreaksbr }}</p>
+            <small class="text-muted">{{ message.timestamp|date:"d M, H:i" }}</small>
+        </div>
+    {% empty %}
+        <p>No hay mensajes en esta conversación aún. ¡Envía el primero!</p>
+    {% endfor %}
+</div>
+
+<h4>Responder:</h4>
+<form method="post">
+    {% csrf_token %}
+    {{ form.body.label_tag }}
+    {{ form.body }}
+    {% if form.body.errors %}<div class="text-danger">{{ form.body.errors }}</div>{% endif %}
+    <input type="hidden" name="recipient" value="{{ other_user.id }}"> {# Para el form de respuesta #}
+    <button type="submit" class="btn btn-primary mt-2">Enviar Respuesta</button>
+</form>
+<a href="{% url 'message_list' %}" class="btn btn-secondary mt-2">Volver a Mensajes</a>
+{% endblock %}

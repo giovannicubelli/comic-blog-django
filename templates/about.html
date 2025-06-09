@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Acerca de Mí - Comic Blog{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="mb-4">Un Poco Sobre Mí</h1> {# <--- CAMBIA EL TÍTULO SI QUIERES #}
+
+            <p class="lead">
+                ¡Hola! Soy Giovanni, el entusiasta de los cómics detrás de esta web.
+            </p>
+            <p>
+                Este blog es mi rincón para compartir reseñas, noticias,
+                y todo lo relacionado con el increíble universo de las viñetas.
+            </p>
+            <p>
+                Mi objetivo es crear un espacio para discutir las últimas entregas de Marvel y DC, descubrir joyas independientes,
+                y conectar con otros fans."
+            </p>
+            <p>
+                Además de los cómics, también me interesa otra clase de lecturas: como "El hobbit", obras de Lovecraft o Nietzche, videojuegos y las MMA
+            </p>
+            <p>
+                ¡Gracias por pasarte! Espero que disfrutes tu estancia y vuelvas a menudo.
+                No dudes en dejar comentarios o contactarme a través de mi seccion de contacto.
+            </p>
+            {# --- FIN DE LA EDICIÓN PRINCIPAL DE TEXTO --- #}
+
+            <hr>
+            <p class="text-center">
+                <a href="{% url 'blog:post_list' %}" class="btn btn-outline-primary">Ver todas las publicaciones</a>
+                <a href="{% url 'home' %}" class="btn btn-outline-secondary">Volver al Inicio</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
